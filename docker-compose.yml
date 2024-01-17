@@ -8,9 +8,6 @@ services:
     container_name: nginx-backend
     ports:
       - "5136:5136"
-    depends_on:
-      - db
-    command: ["dotnet", "ef" , "database update"] 
     networks:
       - nginx-network
 
@@ -20,7 +17,7 @@ services:
     build: 
       context: ./nginx-frontend
     ports:
-      - "3000:3000"
+      - "3000:80"
     networks:
       - nginx-network
     depends_on:
@@ -30,5 +27,6 @@ services:
 
 networks:
   nginx-network:
+    driver: bridge
 
     
